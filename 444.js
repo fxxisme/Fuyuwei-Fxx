@@ -70,7 +70,8 @@ function debounce(e, t) {
             }, t));
     };
 }
-var canvasEl = document.querySelector('.fireworks');
+// var canvasEl = document.querySelector('.fireworks');
+var canvasEl = document.createElement('canvas');
 if (canvasEl) {
     var ctx = canvasEl.getContext('2d'),
         numberOfParticules = 30,
