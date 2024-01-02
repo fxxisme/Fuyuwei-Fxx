@@ -74,7 +74,7 @@ function debounce(e, t) {
 var canvasEl = document.createElement('canvas');
 // 设置 canvas 元素的属性
 Object.assign(canvasEl, {
-    style: 'position: fixed; left: 0; top: 0; z-index: 1; pointer-events: none;',
+    style: 'position: fixed; left: 0; top: 0; z-index: 999999; pointer-events: none;',
 });
 document.body.appendChild(canvasEl);
 // console.log('canvasEl ius ', canvasEl)
