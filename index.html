@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/1.css">
 </head>
+
 <body>
     <!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>  -->
-    <div class="cotainer" >
+    <div class="cotainer">
         这是我的内容
+        <div style="width: 80%;margin: 0 auto;">
+            <div id="tcomment"></div>
+        </div>
     </div>
-    <script type="text/javascript" src="https://cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    
+    <script type="text/javascript" src="https://cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
     <!-- <script type="text/javascript" src="https://cdn.bootcss.com/animejs/3.2.2/anime.min.js"></script>  -->
 
     <script src="./js/firework_v2.js"></script>
+    <script src="https://cdn.staticfile.org/twikoo/1.6.29/twikoo.all.min.js"></script>
+    <script>
+        twikoo.init({
+            envId: 'https://fxxisme-twikoo.hf.space', // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+            el: '#tcomment', // 容器元素
+            // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+            // path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+            lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
+        })
+    </script>
 </body>
+
 </html>
