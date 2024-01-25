@@ -1,5 +1,5 @@
 name: TikTok解锁-美国
-desc: 默认解锁台湾地区限制，切换需要
+desc: US
 
 http:
   mitm:
