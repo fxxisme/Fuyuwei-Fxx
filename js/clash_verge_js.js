@@ -44,9 +44,12 @@ function main(params) {
     const proxies = params['proxies'];
     const group = params['proxy-groups'];
     for (let i = 0; i < proxiesArr.length; i++) {
-        proxies.push(proxiesArr[i]);
+        const temp_proxy = proxiesArr[i];
+        if (!proxies.find(e => e.name == temp_proxy.name)) {
+            proxies.push(temp_proxy);
+        }
         for (let c = 0; c < group.length; c++) {
-            group[c].proxies.push(proxiesArr[i].name);
+            group[c].proxies.push(temp_proxy.name);
         }
     }
     /**
