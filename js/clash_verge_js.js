@@ -7,14 +7,15 @@ function main(params) {
         params.dns.enabled = false;
     }
 
+    const proxies = params['proxies'];
+    const group = params['proxy-groups'];
+
     /**
      * 开始插入额外的 proxies
      */
-    const proxiesArr = [
+    let proxiesArr = [
+        
         {
-            alterId: 0,
-            cipher: 'auto',
-            flow: '',
             name: 'JP-Oracle-djt.fxx6.asia',
             network: 'ws',
             port: 443,
@@ -22,9 +23,9 @@ function main(params) {
             servername: 'djt.fxx6.asia',
             sni: 'djt.fxx6.asia',
             tls: true,
-            type: 'vmess',
-            uuid: '00bec698-09c7-449c-8e2a-8147f20f5449',
-            'ws-opts': { headers: { Host: 'wkr.fxx6.asia' }, path: '/00bec698-09c7-449c-8e2a-8147f20f5449' },
+            type: 'trojan',
+            password: 'b303e9e6-72a8-4ccf-9067-3e405698f9f7',
+            'ws-opts': { headers: { Host: 'djt.fxx6.asia' }, path: '/b303e9e6-72a8-4ccf-9067-3e405698f9f7' },
         },
         {
             name: 'JP-Oracle-my.fxx6.asia',
@@ -36,22 +37,21 @@ function main(params) {
             tls: true,
             type: 'trojan',
             password: 'da1ce249-a223-4fe5-8f0c-0f54fcb2793f',
-            'ws-opts': { headers: { Host: 'wkr.fxx6.asia' }, path: '/da1ce249-a223-4fe5-8f0c-0f54fcb2793f' },
+            'ws-opts': { headers: { Host: 'my.fxx6.asia' }, path: '/da1ce249-a223-4fe5-8f0c-0f54fcb2793f' },
         },
-        
     ];
 
-    const proxies = params['proxies'];
-    const group = params['proxy-groups'];
+    if (proxies.findIndex((e) => e.name.indexOf('Oracle') > -1 || e.name.indexOf('自建') > -1 || e.name.indexOf('FYW') > -1) > -1) {
+        proxiesArr = [];
+    }
+
     for (let i = 0; i < proxiesArr.length; i++) {
         const temp_proxy = proxiesArr[i];
-        if (!proxies.find(e => e.name == temp_proxy.name)) {
-            proxies.push(temp_proxy);
-        }
-        for (let c = 0; c < group.length; c++) {
-            group[c].proxies.push(temp_proxy.name);
-        }
+        proxies.push(temp_proxy);
     }
+
+    //
+
     /**
      * 插入节点完成
      */
@@ -60,7 +60,7 @@ function main(params) {
      * 开始插入规则
      */
     // 定义规则用的代理组
-    const myGroup = ['极速云', 'Proxy', '节点选择', '🚀 节点选择'];
+    const myGroup = ['极速云', 'Proxy', '节点选择', '🚀 节点选择', '顶级机场'];
     /**
      * 额外添加的规则
      */
