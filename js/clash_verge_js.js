@@ -6,10 +6,10 @@ function main(params) {
         params.dns.enable = false;
         params.dns.enabled = false;
     }
-
+  
     const proxies = params['proxies'];
     const group = params['proxy-groups'];
-
+  
     /**
      * 开始插入额外的 proxies
      */
@@ -24,8 +24,8 @@ function main(params) {
             sni: 'djt.fxx6.asia',
             tls: true,
             type: 'trojan',
-            password: 'b303e9e6-72a8-4ccf-9067-3e405698f9f7',
-            'ws-opts': { headers: { Host: 'djt.fxx6.asia' }, path: '/b303e9e6-72a8-4ccf-9067-3e405698f9f7' },
+            password: '3696659b-6321-4b81-909d-0b0c0387872b',
+            'ws-opts': { headers: { Host: 'djt.fxx6.asia' }, path: '/3696659b-6321-4b81-909d-0b0c0387872b' },
         },
         {
             name: 'JP-Oracle-my.fxx6.asia',
@@ -40,22 +40,22 @@ function main(params) {
             'ws-opts': { headers: { Host: 'my.fxx6.asia' }, path: '/da1ce249-a223-4fe5-8f0c-0f54fcb2793f' },
         },
     ];
-
+  
     if (proxies.findIndex((e) => e.name.indexOf('Oracle') > -1 || e.name.indexOf('自建') > -1 || e.name.indexOf('FYW') > -1) > -1) {
         proxiesArr = [];
     }
-
+  
     for (let i = 0; i < proxiesArr.length; i++) {
         const temp_proxy = proxiesArr[i];
         proxies.push(temp_proxy);
     }
-
+  
     //
-
+  
     /**
      * 插入节点完成
      */
-
+  
     /**
      * 开始插入规则
      */
@@ -78,7 +78,7 @@ function main(params) {
         'DOMAIN-SUFFIX,icloud-content.com.cn',
     ];
     const rules = params.rules;
-
+  
     for (let i = 0; i < myGroup.length; i++) {
         const match_group = group.find((e) => e.name == myGroup[i] || e.name.indexOf(myGroup[i]) > -1);
         if (match_group) {
@@ -86,18 +86,18 @@ function main(params) {
             break;
         }
     }
-
+  
     /**
      * 插入规则完成
      */
-
+  
     // 自定义代理组
     const MY = {
         name: 'MY',
         type: 'select',
         proxies: [],
     };
-
+  
     const JP = {
         name: 'JP-top',
         type: 'url-test',
@@ -162,7 +162,7 @@ function main(params) {
         proxies: [],
     };
     const my111 = [JP, USA, TW, HK, SR, KR, OTHER];
-
+  
     for (let i = 0; i < proxies.length; i++) {
         const proxy = proxies[i];
         if (checkArea(proxy.name, 'JP')) {
@@ -188,24 +188,24 @@ function main(params) {
             MY.proxies.push(temp.name);
         }
     }
-
+  
     for (let i = 0; i < proxiesArr.length; i++) {
         MY.proxies.push(proxiesArr[i].name);
     }
-
+  
     if (MY.proxies.length > 0) {
         params['proxy-groups'].push(MY);
-
+  
         const main_group = params['proxy-groups'].find((e) => myGroup.find((m) => m == e.name || e.name.indexOf(m) > -1));
         if (main_group) {
             main_group.proxies.push('MY');
         }
     }
-
+  
     // 加入select代理组
-
+  
     // 自定义代理组
-
+  
     // 测试用
     // const MY = {
     //     name: 'MY',
@@ -216,22 +216,22 @@ function main(params) {
     //     lazy: true,
     //     proxies: ['oracle-138-ssr', 'oracle-152'],
     // };
-
+  
     // params['proxy-groups'].push(MY);
-
+  
     return JSON.parse(JSON.stringify(params));
-}
-
-const AREA = {
+  }
+  
+  const AREA = {
     JP: ['jp', 'JP', '日本', 'Japan', '🇯🇵', 'oracle', 'Oracle'],
     USA: ['usa', 'us', 'USA', 'US', '美国', 'United States', '🇺🇸'],
     SR: ['sr', 'SR', '新加坡', 'Singapore', '🇸🇬'],
     HK: ['hk', 'HK', '香港', 'Hong Kong', '🇭🇰'],
     TW: ['tw', 'TW', '台湾', 'Taiwan', '🇨🇳'],
     KR: ['kr', 'KR', '韩国'],
-};
-
-function checkArea(name, key) {
+  };
+  
+  function checkArea(name, key) {
     let flag = false;
     const area = AREA[key];
     if (area) {
@@ -243,4 +243,5 @@ function checkArea(name, key) {
         }
     }
     return flag;
-}
+  }
+  
