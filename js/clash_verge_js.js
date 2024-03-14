@@ -194,7 +194,7 @@ function main(params) {
     }
   
     if (MY.proxies.length > 0) {
-        params['proxy-groups'].push(MY);
+        params['proxy-groups'].unshift(MY);
   
         const main_group = params['proxy-groups'].find((e) => myGroup.find((m) => m == e.name || e.name.indexOf(m) > -1));
         if (main_group) {
