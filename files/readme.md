@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="alist.fxx6.top"><img width="100px" alt="logo" src="https://lsky.fxx6.top/i/2024/05/28/665540bd563df.png"/></a>
+  <a href="alist.fxx6.top"><img width="100px" alt="logo" target="_black" src="https://lsky.fxx6.top/i/2024/05/28/665540bd563df.png"/></a>
   <p><em>自用网盘挂载和备份盘</em></p>
 <div>
 </div>
