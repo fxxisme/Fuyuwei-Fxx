@@ -7,7 +7,8 @@
 
 ---
 
-备份盘: [zfile.fxx6.top](http://zfile.fxx6.top)
+- 备份盘: [zfile.fxx6.top](http://zfile.fxx6.top)  
+- 自用图床: [lsky.fxx6.top](http://lsky.fxx6.top)
 
 ---
 
