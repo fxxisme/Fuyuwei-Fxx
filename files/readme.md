@@ -1,14 +1,13 @@
 <div align="center">
-  <a href="https://alist.fxx6.top"><img width="100px" alt="logo" target="_black" src="https://lsky.fxx6.top/i/2024/05/28/665540bd563df.png"/></a>
-  <p><em>自用网盘挂载和备份盘</em></p>
+  <a href="https://alist.fxx6.top"><img width="100px" alt="logo" target="_black" src="https://easy.fxx6.top/i/2024/06/05/1717553569.png"/></a>
+  <p><em>自用资源盘</em></p>
 <div>
 </div>
 </div>
 
 ---
 
-- 备份盘: [zfile.fxx6.top](http://zfile.fxx6.top)  
-- 自用图床: [lsky.fxx6.top](http://lsky.fxx6.top)
+- 自用图床: [easy.fxx6.top](http://easy.fxx6.top)
 
 ---
 
