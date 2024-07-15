@@ -1,36 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+<script src="https://cdn.staticfile.org/twikoo/1.6.29/twikoo.all.min.js"></script>
+<script>
+    let task = setInterval(() => {
+        const root = document.getElementById('root');
+        const pEl = root.getElementsByClassName('body hope-stack')[0];
+        if (pEl) {
+            // 创建一个新的子元素
+            const newElement = document.createElement('div');
+            newElement.style = 'width: 100%; margin: 0 auto';
+            newElement.innerHTML = '<div id="tcomment"></div>';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/1.css">
-</head>
+            // 将新元素添加到父元素中
+            pEl.appendChild(newElement);
 
-<body>
-    <!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>  -->
-    <div class="cotainer">
-        这是我的内容
-        <div style="width: 80%;margin: 0 auto;">
-            <div id="tcomment"></div>
-        </div>
-    </div>
-    
-    <script type="text/javascript" src="https://cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
-    <!-- <script type="text/javascript" src="https://cdn.bootcss.com/animejs/3.2.2/anime.min.js"></script>  -->
+            setTimeout(() => {
+                twikoo.init({
+                    envId: 'https://fxxisme-twikoo.hf.space', // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+                    el: '#tcomment', // 容器元素
+                    // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+                    path: location.host, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+                    lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
+                });
+            }, 200);
 
-    <script src="./js/firework_v2.js"></script>
-    <script src="https://cdn.staticfile.org/twikoo/1.6.29/twikoo.all.min.js"></script>
-    <script>
-        twikoo.init({
-            envId: 'https://fxxisme-twikoo.hf.space', // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
-            el: '#tcomment', // 容器元素
-            // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
-            // path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
-            lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
-        })
-    </script>
-</body>
+            clearInterval(task);
+        }
+    }, 200);
 
-</html>
+    (function () {
+        //  隐藏文件 /\/README.md/i
+        var a_idx = 0;
+        window.onclick = function (event) {
+            var a = new Array('❤富强❤', '❤民主❤', '❤文明❤', '❤和谐❤', '❤自由❤', '❤平等❤', '❤公正❤', '❤法治❤', '❤爱国❤', '❤敬业❤', '❤诚信❤', '❤友善❤');
+            var heart = document.createElement('b'); //创建b元素
+            heart.onselectstart = new Function('event.returnValue=false'); //防止拖动
+
+            document.body.appendChild(heart).innerHTML = a[a_idx]; //将b元素添加到页面上
+            a_idx = (a_idx + 1) % a.length;
+            heart.style.cssText = 'position: fixed;left:-100%;'; //给p元素设置样式
+
+            var f = 13, // 字体大小
+                x = event.clientX - f / 2 - 30, // 横坐标
+                y = event.clientY - f, // 纵坐标
+                c = randomColor(), // 随机颜色
+                a = 1, // 透明度
+                s = 0.8; // 放大缩小
+
+            var timer = setInterval(function () {
+                //添加定时器
+                if (a <= 0) {
+                    document.body.removeChild(heart);
+                    clearInterval(timer);
+                } else {
+                    heart.style.cssText = 'font-size:16px;cursor: default;position: fixed;color:' + c + ';left:' + x + 'px;top:' + y + 'px;opacity:' + a + ';transform:scale(' + s + ');';
+
+                    y--;
+                    a -= 0.016;
+                    s += 0.002;
+                }
+            }, 15);
+        };
+        // 随机颜色
+        function randomColor() {
+            return 'rgb(' + ~~(Math.random() * 255) + ',' + ~~(Math.random() * 255) + ',' + ~~(Math.random() * 255) + ')';
+        }
+    })();
+</script>
