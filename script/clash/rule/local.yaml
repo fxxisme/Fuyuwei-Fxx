@@ -1,0 +1,9 @@
+# Local 规则集
+# 适用于 Clash rule-providers
+# behavior: ipcidr
+
+payload:
+    - '222.65.104.78/32'
+    - '192.168.1.0/24'
+    - '10.0.0.0/8'
+    - '172.16.0.0/12'
