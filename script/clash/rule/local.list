@@ -1,5 +1,8 @@
 # 内容：Local
 # 数量：xxx条
 IP-CIDR,222.65.104.78/32
+IP-CIDR,192.168.1.0/24
+IP-CIDR,10.0.0.0/8
+IP-CIDR,172.16.0.0/12
 DOMAIN-SUFFIX,apple.com.cn
 DOMAIN-KEYWORD,epicgames-download
