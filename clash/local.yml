@@ -1,0 +1,584 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: warning
+external-controller: :9090
+
+# 代理提供商配置
+proxy-providers:
+  all-proxies:
+    type: http
+    url: "https://sub.fxx6.top/share/col/main?token=123abc"
+    interval: 10800   # 每12小时更新一次
+    path: ./proxies/all-proxies.yaml
+    user-agent: "clash-verge/v2.3.2"  # 自定义User-Agent
+    health-check:
+      enable: true
+      interval: 10800  # 每3小时检查一次
+      lazy: true
+      url: http://www.gstatic.com/generate_204
+
+# 代理节点（现在为空，由 proxy-providers 提供）
+proxies: []
+
+proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: ♻️ 自动选择
+    type: url-test
+    use:
+      - all-proxies
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  - name: 🚀 手动切换
+    type: select
+    use:
+      - all-proxies
+
+  # === 香港 ===
+  - name: 🇭🇰 香港节点
+    type: url-test
+    use:
+      - all-proxies
+    filter: "(?i)港|hk|hongkong|hong kong"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # === 日本 ===
+  - name: 🇯🇵 日本节点
+    type: url-test
+    use:
+      - all-proxies
+    filter: "(?i)日本|jp|japan"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # === 美国 ===
+  - name: 🇺🇲 美国节点
+    type: url-test
+    use:
+      - all-proxies
+    filter: "(?i)美|us|unitedstates|united states"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+
+  # === 台湾 ===
+  - name: 🇨🇳 台湾节点
+    type: url-test
+    use:
+      - all-proxies
+    filter: "(?i)台|tw|taiwan"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # === 新加坡 ===
+  - name: 🇸🇬 狮城节点
+    type: url-test
+    use:
+      - all-proxies
+    filter: "(?i)新加坡|狮城|sg|singapore"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # === 韩国 ===
+  - name: 🇰🇷 韩国节点
+    type: url-test
+    use:
+      - all-proxies
+    filter: "(?i)韩|kr|korea"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # === 其他区域 ===
+  - name: 🐾 其他节点
+    type: url-test
+    use:
+      - all-proxies
+    filter: "(?i)^(?!.*(港|hk|hongkong|hong kong|日本|jp|japan|美|us|unitedstates|united states|台|tw|taiwan|新加坡|狮城|sg|singapore|韩|kr|korea)).*"
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+
+  # === 其他应用场景代理组(需要调整引用) ===
+  - name: 📲 电报消息
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇭🇰 香港节点
+      - ♻️ 自动选择
+      - 🇸🇬 狮城节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: 📹 油管视频
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇸🇬 狮城节点
+      - ♻️ 自动选择
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: 🌍 国外媒体
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: 自用AI中转
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇭🇰 香港节点
+      - ♻️ 自动选择
+      - 🇸🇬 狮城节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+
+  - name: chatGPT
+    type: select
+    proxies:
+      - 🇺🇲 美国节点
+      - 🚀 节点选择
+      - 🇭🇰 香港节点
+      - ♻️ 自动选择
+      - 🇸🇬 狮城节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+
+  - name: 🌏 国内媒体
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🚀 手动切换
+
+  - name: 📢 谷歌FCM
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: Ⓜ️ 微软Bing
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: Ⓜ️ 微软云盘
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: Ⓜ️ 微软服务
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: 🍎 苹果服务
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🇨🇳 台湾节点
+      - 🇺🇲 美国节点
+      - 🇭🇰 香港节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: 🎮 游戏平台
+    type: select
+    proxies:
+      - 🇭🇰 香港节点
+      - 🚀 节点选择
+      - 🇺🇲 美国节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🐾 其他节点
+      - 🚀 手动切换
+      - DIRECT
+
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - ♻️ 自动选择
+
+  - name: 🛑 广告拦截
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+
+  - name: 🍃 应用净化
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - DIRECT
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇸🇬 狮城节点
+      - 🇯🇵 日本节点
+      - 🇺🇲 美国节点
+      - 🇰🇷 韩国节点
+      - 🚀 手动切换
+
+# 规则配置
+rules:
+  # 局域网直连
+  - RULE-SET,LocalAreaNetwork,🎯 全球直连
+  # 反劫持规则
+  - RULE-SET,UnBan,🎯 全球直连
+  # 广告拦截
+  - RULE-SET,BanAD,🛑 广告拦截
+  # 应用净化
+  - RULE-SET,BanProgramAD,🍃 应用净化
+  # 谷歌FCM
+  - RULE-SET,GoogleFCM,📢 谷歌FCM
+  # 谷歌中国服务
+  - RULE-SET,GoogleCN,🎯 全球直连
+  # Steam中国
+  - RULE-SET,SteamCN,🎯 全球直连
+  # 微软Bing
+  - RULE-SET,Bing,Ⓜ️ 微软Bing
+  # 微软云盘
+  - RULE-SET,OneDrive,Ⓜ️ 微软云盘
+  # 微软服务
+  - RULE-SET,Microsoft,Ⓜ️ 微软服务
+  # 苹果服务
+  - RULE-SET,Apple,🍎 苹果服务
+  # 电报消息
+  - RULE-SET,Telegram,📲 电报消息
+  # 游戏平台
+  - RULE-SET,Steam,🎮 游戏平台
+  - RULE-SET,Epic,🎮 游戏平台
+  - RULE-SET,Origin,🎮 游戏平台
+  - RULE-SET,Sony,🎮 游戏平台
+  - RULE-SET,Nintendo,🎮 游戏平台
+  - RULE-SET,LocalSteam,🎮 游戏平台
+  # 油管视频
+  - RULE-SET,YouTube,📹 油管视频
+  # 国内媒体
+  - RULE-SET,ChinaMedia,🌏 国内媒体
+  # 国外媒体
+  - RULE-SET,ProxyMedia,🌍 国外媒体
+  # 自用AI中转
+  - RULE-SET,SelfAITransit,自用AI中转
+  # ChatGPT / Codex
+  - RULE-SET,ChatGPT,chatGPT
+  # 代理网站
+  - RULE-SET,ProxyGFWlist,🚀 节点选择
+  # 中国直连
+  - RULE-SET,ChinaDomain,🎯 全球直连
+  - RULE-SET,ChinaCompanyIp,🎯 全球直连
+  - RULE-SET,Download,🎯 全球直连
+  # 其他国外媒体
+  - RULE-SET,Other,🌍 国外媒体
+  # 本地规则
+  - RULE-SET,Local,🎯 全球直连
+  # 中国IP
+  - GEOIP,CN,🎯 全球直连
+  # 漏网之鱼
+  - MATCH,🐟 漏网之鱼
+
+# 规则集配置
+rule-providers:
+  LocalAreaNetwork:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml"
+    path: ./ruleset/LocalAreaNetwork.yaml
+    interval: 86400
+
+  UnBan:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml"
+    path: ./ruleset/UnBan.yaml
+    interval: 86400
+
+  BanAD:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml"
+    path: ./ruleset/BanAD.yaml
+    interval: 86400
+
+  BanProgramAD:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml"
+    path: ./ruleset/BanProgramAD.yaml
+    interval: 86400
+
+  GoogleFCM:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml"
+    path: ./ruleset/GoogleFCM.yaml
+    interval: 86400
+
+  GoogleCN:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCN.yaml"
+    path: ./ruleset/GoogleCN.yaml
+    interval: 86400
+
+  SteamCN:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml"
+    path: ./ruleset/SteamCN.yaml
+    interval: 86400
+
+  Bing:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bing.yaml"
+    path: ./ruleset/Bing.yaml
+    interval: 86400
+
+  OneDrive:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OneDrive.yaml"
+    path: ./ruleset/OneDrive.yaml
+    interval: 86400
+
+  Microsoft:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml"
+    path: ./ruleset/Microsoft.yaml
+    interval: 86400
+
+  Apple:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Apple.yaml"
+    path: ./ruleset/Apple.yaml
+    interval: 86400
+
+  Telegram:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml"
+    path: ./ruleset/Telegram.yaml
+    interval: 86400
+
+  Steam:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml"
+    path: ./ruleset/Steam.yaml
+    interval: 86400
+
+  Epic:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml"
+    path: ./ruleset/Epic.yaml
+    interval: 86400
+
+  Origin:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Origin.yaml"
+    path: ./ruleset/Origin.yaml
+    interval: 86400
+
+  Sony:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
+    path: ./ruleset/Sony.yaml
+    interval: 86400
+
+  Nintendo:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml"
+    path: ./ruleset/Nintendo.yaml
+    interval: 86400
+
+  YouTube:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml"
+    path: ./ruleset/YouTube.yaml
+    interval: 86400
+
+  ChinaMedia:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaMedia.yaml"
+    path: ./ruleset/ChinaMedia.yaml
+    interval: 86400
+
+  ProxyMedia:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyMedia.yaml"
+    path: ./ruleset/ProxyMedia.yaml
+    interval: 86400
+
+  ProxyGFWlist:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml"
+    path: ./ruleset/ProxyGFWlist.yaml
+    interval: 86400
+
+  ChinaDomain:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml"
+    path: ./ruleset/ChinaDomain.yaml
+    interval: 86400
+
+  ChinaCompanyIp:
+    type: http
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml"
+    path: ./ruleset/ChinaCompanyIp.yaml
+    interval: 86400
+
+  Download:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Download.yaml"
+    path: ./ruleset/Download.yaml
+    interval: 86400
+
+  # 自定义规则（如果没有对应的 Providers 版本，保持原链接）
+  Other:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/fxxisme/Fuyuwei-Fxx/main/script/clash/rule/other.yaml"
+    path: ./ruleset/Other.yaml
+    interval: 86400
+
+  SelfAITransit:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/fxxisme/Fuyuwei-Fxx/main/script/clash/rule/self-ai-transit.yaml"
+    path: ./ruleset/SelfAITransit.yaml
+    interval: 86400
+
+  ChatGPT:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/fxxisme/Fuyuwei-Fxx/main/script/clash/rule/chatgpt.yaml"
+    path: ./ruleset/ChatGPT.yaml
+    interval: 86400
+
+  Local:
+    type: http
+    behavior: ipcidr
+    url: "https://raw.githubusercontent.com/fxxisme/Fuyuwei-Fxx/main/script/clash/rule/local.yaml"
+    path: ./ruleset/Local.yaml
+    interval: 86400
+    
+  LocalSteam:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/fxxisme/Fuyuwei-Fxx/main/script/clash/rule/steam.yaml"
+    path: ./ruleset/LocalSteam.yaml
+    interval: 86400

@@ -1,0 +1,17 @@
+payload:
+    # ChatGPT web/app, Codex ChatGPT-login endpoint, and WebSocket traffic.
+    - DOMAIN-SUFFIX,chatgpt.com
+    - DOMAIN-SUFFIX,openai.com
+    - DOMAIN-SUFFIX,oaistatic.com
+    - DOMAIN-SUFFIX,oaiusercontent.com
+
+    # OpenAI network allowlist domains used by ChatGPT web/app login, telemetry, and assets.
+    - DOMAIN-SUFFIX,auth.openai.com
+    - DOMAIN-SUFFIX,openaimerge.com
+    - DOMAIN-SUFFIX,featuregates.org
+    - DOMAIN-SUFFIX,featureassets.org
+    - DOMAIN-SUFFIX,statsig.com
+    - DOMAIN-SUFFIX,statsigapi.net
+
+    # API-key mode for Codex/OpenAI SDK model requests.
+    - DOMAIN,api.openai.com
