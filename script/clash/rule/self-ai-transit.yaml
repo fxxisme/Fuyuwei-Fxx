@@ -1,3 +1,3 @@
 payload:
-    - IP-CIDR,140.83.48.46/32,no-resolve
-    - IP-CIDR,217.142.249.119/32,no-resolve
+    - DOMAIN,cpa-1.fxx6.top
+    - DOMAIN,cpa-2.fxx6.top
