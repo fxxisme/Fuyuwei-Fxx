@@ -1,3 +1,5 @@
 payload:
     - DOMAIN,cpa-1.fxx6.top
     - DOMAIN,cpa-2.fxx6.top
+    - AND,((IP-CIDR,217.142.249.119/32),(DST-PORT,8327))
+    - AND,((IP-CIDR,140.83.48.46/32),(DST-PORT,8317))
