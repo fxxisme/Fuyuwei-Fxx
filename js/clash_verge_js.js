@@ -13,33 +13,8 @@ function main(params) {
     /**
      * 开始插入额外的 proxies
      */
-    let proxiesArr = [
-        
-        {
-            name: 'JP-Oracle-djt.fxx6.asia',
-            network: 'ws',
-            port: 443,
-            server: 'djt.fxx6.asia',
-            servername: 'djt.fxx6.asia',
-            sni: 'djt.fxx6.asia',
-            tls: true,
-            type: 'trojan',
-            password: '3696659b-6321-4b81-909d-0b0c0387872b',
-            'ws-opts': { headers: { Host: 'djt.fxx6.asia' }, path: '/3696659b-6321-4b81-909d-0b0c0387872b' },
-        },
-        {
-            name: 'JP-Oracle-my.fxx6.asia',
-            network: 'ws',
-            port: 443,
-            server: 'my.fxx6.asia',
-            servername: 'my.fxx6.asia',
-            sni: 'my.fxx6.asia',
-            tls: true,
-            type: 'trojan',
-            password: 'da1ce249-a223-4fe5-8f0c-0f54fcb2793f',
-            'ws-opts': { headers: { Host: 'my.fxx6.asia' }, path: '/da1ce249-a223-4fe5-8f0c-0f54fcb2793f' },
-        },
-    ];
+    // 私有节点不要提交到公开仓库；需要时在本地未跟踪版本中维护。
+    let proxiesArr = [];
   
     if (proxies.findIndex((e) => e.name.indexOf('Oracle') > -1 || e.name.indexOf('自建') > -1 || e.name.indexOf('FYW') > -1) > -1) {
         proxiesArr = [];

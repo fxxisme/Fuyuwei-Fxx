@@ -3,21 +3,21 @@ socks-port: 7891
 allow-lan: true
 mode: rule
 log-level: warning
-external-controller: :9090
+external-controller: 127.0.0.1:9090
 
 # 代理提供商配置
 proxy-providers:
   all-proxies:
     type: http
-    url: "https://sub.fxx6.top/share/col/main?token=123abc"
-    interval: 10800   # 每12小时更新一次
+    url: "https://sub.fxx6.top/share/col/main?token=REPLACE_WITH_TOKEN"
+    interval: 10800   # 每3小时更新一次
     path: ./proxies/all-proxies.yaml
     user-agent: "clash-verge/v2.3.2"  # 自定义User-Agent
     health-check:
       enable: true
       interval: 10800  # 每3小时检查一次
       lazy: true
-      url: http://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
 
 # 代理节点（现在为空，由 proxy-providers 提供）
 proxies: []
@@ -325,6 +325,8 @@ rules:
   - RULE-SET,LocalAreaNetwork,🎯 全球直连
   # 反劫持规则
   - RULE-SET,UnBan,🎯 全球直连
+  # 自用AI中转
+  - RULE-SET,SelfAITransit,自用AI中转
   # 广告拦截
   - RULE-SET,BanAD,🛑 广告拦截
   # 应用净化
@@ -358,8 +360,6 @@ rules:
   - RULE-SET,ChinaMedia,🌏 国内媒体
   # 国外媒体
   - RULE-SET,ProxyMedia,🌍 国外媒体
-  # 自用AI中转
-  - RULE-SET,SelfAITransit,自用AI中转
   # ChatGPT / Codex
   - RULE-SET,ChatGPT,chatGPT
   # 代理网站
@@ -571,7 +571,7 @@ rule-providers:
 
   Local:
     type: http
-    behavior: ipcidr
+    behavior: classical
     url: "https://raw.githubusercontent.com/fxxisme/Fuyuwei-Fxx/main/script/clash/rule/local.yaml"
     path: ./ruleset/Local.yaml
     interval: 86400

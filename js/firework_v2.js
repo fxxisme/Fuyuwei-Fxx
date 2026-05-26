@@ -1,6 +1,10 @@
 'use strict';
 function updateCoords(e) {
-    (pointerX = (e.clientX || e.touches[0].clientX) - canvasEl.getBoundingClientRect().left), (pointerY = e.clientY || e.touches[0].clientY - canvasEl.getBoundingClientRect().top);
+    var point = e.touches && e.touches.length ? e.touches[0] : e;
+    var rect = canvasEl.getBoundingClientRect();
+
+    pointerX = point.clientX - rect.left;
+    pointerY = point.clientY - rect.top;
 }
 function setParticuleDirection(e) {
     var t = (anime.random(0, 360) * Math.PI) / 180,
@@ -78,7 +82,7 @@ Object.assign(canvasEl, {
 });
 document.body.appendChild(canvasEl);
 // console.log('canvasEl ius ', canvasEl)
-if (canvasEl) {
+if (canvasEl && typeof anime !== 'undefined') {
     var ctx = canvasEl.getContext('2d'),
         numberOfParticules = 30,
         pointerX = 0,
@@ -86,7 +90,7 @@ if (canvasEl) {
         tap = 'mousedown',
         colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'],
         setCanvasSize = debounce(function () {
-            (canvasEl.width = 2 * window.innerWidth), (canvasEl.height = 2 * window.innerHeight), (canvasEl.style.width = window.innerWidth + 'px'), (canvasEl.style.height = window.innerHeight + 'px'), canvasEl.getContext('2d').scale(2, 2);
+            (canvasEl.width = 2 * window.innerWidth), (canvasEl.height = 2 * window.innerHeight), (canvasEl.style.width = window.innerWidth + 'px'), (canvasEl.style.height = window.innerHeight + 'px'), ctx.setTransform(2, 0, 0, 2, 0, 0);
         }, 500),
         render = anime({
             duration: 1 / 0,

@@ -112,6 +112,16 @@ class CursorSpecialEffects {
     this.running = false
   }
 
+  handleResize() {
+    this.globalWidth = window.innerWidth
+    this.globalHeight = window.innerHeight
+
+    this.renderCanvas.width = this.computerCanvas.width = this.globalWidth
+    this.renderCanvas.height = this.computerCanvas.height = this.globalHeight
+    this.renderCanvas.style.width = this.globalWidth + 'px'
+    this.renderCanvas.style.height = this.globalHeight + 'px'
+  }
+
   init() {
     const style = this.renderCanvas.style
     style.position = 'fixed'
@@ -119,13 +129,13 @@ class CursorSpecialEffects {
     style.zIndex = '999999999999999999999999999999999999999999'
     style.pointerEvents = 'none'
 
-    style.width = this.renderCanvas.width = this.computerCanvas.width = this.globalWidth
-    style.height = this.renderCanvas.height = this.computerCanvas.height = this.globalHeight
+    this.handleResize()
 
     document.body.append(this.renderCanvas)
 
     window.addEventListener('mousedown', this.handleMouseDown.bind(this))
     window.addEventListener('pagehide', this.handlePageHide.bind(this))
+    window.addEventListener('resize', this.handleResize.bind(this))
   }
 
   run() {
